@@ -1,0 +1,11 @@
+D:\Korisnici\Goran\Projekti\MonoLevel02\Project.Service\bin\Debug\Project.Service.dll.config
+D:\Korisnici\Goran\Projekti\MonoLevel02\Project.Service\bin\Debug\Project.Service.dll
+D:\Korisnici\Goran\Projekti\MonoLevel02\Project.Service\bin\Debug\Project.Service.pdb
+D:\Korisnici\Goran\Projekti\MonoLevel02\Project.Service\bin\Debug\EntityFramework.dll
+D:\Korisnici\Goran\Projekti\MonoLevel02\Project.Service\bin\Debug\EntityFramework.SqlServer.dll
+D:\Korisnici\Goran\Projekti\MonoLevel02\Project.Service\bin\Debug\EntityFramework.xml
+D:\Korisnici\Goran\Projekti\MonoLevel02\Project.Service\bin\Debug\EntityFramework.SqlServer.xml
+D:\Korisnici\Goran\Projekti\MonoLevel02\Project.Service\obj\Debug\Project.Service.csproj.CoreCompileInputs.cache
+D:\Korisnici\Goran\Projekti\MonoLevel02\Project.Service\obj\Debug\Project.Service.csproj.CopyComplete
+D:\Korisnici\Goran\Projekti\MonoLevel02\Project.Service\obj\Debug\Project.Service.dll
+D:\Korisnici\Goran\Projekti\MonoLevel02\Project.Service\obj\Debug\Project.Service.pdb
