@@ -44,6 +44,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=10.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.10.1.1\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -101,7 +104,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\VehicleController.cs" />
+    <Compile Include="Controllers\VehicleMakeController.cs" />
+    <Compile Include="Controllers\VehicleModelController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -114,14 +118,16 @@
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Vehicle\IndexMakes.cshtml" />
-    <Content Include="Views\Vehicle\CreateMake.cshtml" />
-    <Content Include="Views\Vehicle\EditMake.cshtml" />
-    <Content Include="Views\Vehicle\DeleteMake.cshtml" />
-    <Content Include="Views\Vehicle\IndexModels.cshtml" />
-    <Content Include="Views\Vehicle\EditModel.cshtml" />
-    <Content Include="Views\Vehicle\DeleteModel.cshtml" />
-    <Content Include="Views\Vehicle\CreateModel.cshtml" />
+    <Content Include="Views\VehicleMake\Index.cshtml" />
+    <Content Include="Views\VehicleMake\Create.cshtml" />
+    <Content Include="Views\VehicleMake\Edit.cshtml" />
+    <Content Include="Views\VehicleMake\Delete.cshtml" />
+    <Content Include="Views\VehicleModel\Index.cshtml" />
+    <Content Include="Views\VehicleModel\Create.cshtml" />
+    <Content Include="Views\VehicleModel\Edit.cshtml" />
+    <Content Include="Views\VehicleModel\Delete.cshtml" />
+    <Content Include="Views\VehicleMake\Details.cshtml" />
+    <Content Include="Views\VehicleModel\Details.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

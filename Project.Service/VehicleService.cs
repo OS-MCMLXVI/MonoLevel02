@@ -10,73 +10,64 @@ namespace Project.Service
       public class VehicleService<TModel> : IGenericRepository<TModel> where TModel : class
       {
             private VehicleContext _context;
-            private DbSet<TModel> _dbSet;
+            private DbSet<TModel> _table;
 
 
             #region Constructor
 
-
             public VehicleService(VehicleContext context)
             {
                   this._context = context;
-                  this._dbSet = _context.Set<TModel>();
+                  this._table = _context.Set<TModel>();
             }
 
             public VehicleService()
             {
                   this._context = new VehicleContext();
-                  this._dbSet = _context.Set<TModel>();
+                  this._table = _context.Set<TModel>();
             }
-
 
             #endregion
 
 
             #region CRUD
 
-
             // List
             public IEnumerable<TModel> GetAll()
             {
-                  return _dbSet.ToList();
+                  return _table.ToList();
             }
-
 
             // Detail
             public TModel GetById(int idToFind)
             {
-                  return _dbSet.Find(idToFind);
+                  return _table.Find(idToFind);
             }
-
 
             // Create
             public void Insert(TModel objToInsert)
             {
-                  _dbSet.Add(objToInsert);
+                  _table.Add(objToInsert);
             }
-
 
             // Edit
-            public void Update(TModel objToUpdate)
+            public void Update(TModel objToEdit)
             {
-                  _dbSet.Attach(objToUpdate);
-                  _context.Entry(objToUpdate).State = EntityState.Modified;
+                  _table.Attach(objToEdit);
+                  _context.Entry(objToEdit).State = EntityState.Modified;
             }
-
 
             // Delete
             public void Delete(int idToDelete)
             {
-                  TModel objToDelete = _dbSet.Find(idToDelete);
-                  _dbSet.Remove(objToDelete);
+                  TModel objToDelete = _table.Find(idToDelete);
+                  _table.Remove(objToDelete);
             }
-
 
             #endregion
 
-
+            
             #region Disp...
-
 
             // Disp...
             private bool disposed = false;
@@ -95,7 +86,6 @@ namespace Project.Service
                   Dispose(true);
                   GC.SuppressFinalize(this);
             }
-
 
             #endregion
 

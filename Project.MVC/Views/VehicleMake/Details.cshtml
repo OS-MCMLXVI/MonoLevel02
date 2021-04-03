@@ -1,0 +1,36 @@
+﻿@model Project.MVC.ViewModels.VehicleMakeVM
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>VehicleMakeVM</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MakeId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MakeId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MakeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MakeName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MakeId }) |
+    @Html.ActionLink("Models list", "Index", "VehicleModel", new { id = Model.MakeId }, null) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

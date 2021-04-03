@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Project.MVC.ViewModels.VehicleMakeVM>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Brands list</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MakeId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MakeName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MakeId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MakeName)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id = item.MakeId }) |
+            @Html.ActionLink("Edit", "Edit", new { id = item.MakeId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.MakeId }) |
+            @Html.ActionLink("Models list", "Index", "VehicleModel", new { id = item.MakeId}, null)
+        </td>
+    </tr>
+}
+
+</table>

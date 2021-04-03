@@ -77,3 +77,5 @@ D:\Korisnici\Goran\Projekti\MonoLevel02\Project.MVC\bin\Project.Service.dll.conf
 D:\Korisnici\Goran\Projekti\MonoLevel02\Project.MVC\bin\EntityFramework.xml
 D:\Korisnici\Goran\Projekti\MonoLevel02\Project.MVC\bin\EntityFramework.SqlServer.dll
 D:\Korisnici\Goran\Projekti\MonoLevel02\Project.MVC\bin\EntityFramework.SqlServer.xml
+D:\Korisnici\Goran\Projekti\MonoLevel02\Project.MVC\bin\AutoMapper.dll
+D:\Korisnici\Goran\Projekti\MonoLevel02\Project.MVC\bin\AutoMapper.xml
