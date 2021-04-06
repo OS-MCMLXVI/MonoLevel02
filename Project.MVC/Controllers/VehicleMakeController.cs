@@ -4,6 +4,10 @@ using Project.Service.DAL;
 using Project.Service.Models;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using PagedList;
+using System;
+using System.Linq;
+using AutoMapper;
 
 namespace Project.MVC.Controllers
 {
@@ -22,21 +26,78 @@ namespace Project.MVC.Controllers
 
             #region Index
 
-            public ActionResult Index()
+            public ActionResult Index(string sortOrder, string currentSortOrder, int? page)
             {
-                  List<VehicleMakeVM> viewList = new List<VehicleMakeVM>();
-                  var sourceList = _service.GetAll();
+                  //var mapperConfig = new MapperConfiguration(cfg => {
+                  //      cfg.CreateMap<VehicleMake, VehicleMakeVM>()
+                  //      .ForMember(dest => dest.MakeId, act => act.MapFrom(src => src.Id))
+                  //      .ForMember(dest => dest.MakeName, act => act.MapFrom(src => src.Name)); });
 
-                  foreach (var make in sourceList)
+                  //var mapiranje = new Mapper(mapperConfig);
+                  //var sourceList =  _service.GetAll();
+                  //var viewList = new List<VehicleMakeVM>();
+
+                  //foreach (var make in sourceList)
+                  //      viewList.Add(mapiranje.Map<VehicleMakeVM>(make));
+
+
+                  //viewList = viewList.OrderBy(s => s.Name);
+                  //ViewBag.SortOrder = String.IsNullOrEmpty(sortOrder) ? "descend" : "";
+
+                  //if (currentSortOrder != sortOrder)
+                  //{
+                  //      ViewBag.CurrentSortOrder = sortOrder;
+
+                  //      if (sortOrder == "descend")
+                  //            viewList = viewList.OrderByDescending(s => s.Name);
+                  //}
+
+                  
+                  //int pageSize = 5;
+                  //int pageNumber = (page ?? 1);
+
+
+                  //return View(viewList.ToPagedList(pageNumber, pageSize));
+
+
+
+
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  var sourceList = _service.GetAll().OrderBy(s => s.Name);
+                  ViewBag.SortOrder = String.IsNullOrEmpty(sortOrder) ? "descend" : "";
+
+                  if (currentSortOrder != sortOrder)
                   {
-                        viewList.Add(new VehicleMakeVM
-                        {
-                              MakeId = make.Id,
-                              MakeName = make.Name
-                        });
+                        ViewBag.CurrentSortOrder = sortOrder;
+
+                        if (sortOrder == "descend")
+                              sourceList = sourceList.OrderByDescending(s => s.Name);
                   }
 
-                  return View(viewList);
+
+                  List<VehicleMakeVM> viewList = new List<VehicleMakeVM>();
+                  foreach (var make in sourceList)
+                        viewList.Add(new VehicleMakeVM { MakeId = make.Id, MakeName = make.Name });
+
+
+                  int pageSize = 5;
+                  int pageNumber = (page ?? 1);
+                  return View(viewList.ToPagedList(pageNumber, pageSize));
             }
 
             #endregion

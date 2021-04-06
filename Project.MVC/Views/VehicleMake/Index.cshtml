@@ -1,4 +1,6 @@
-﻿@model IEnumerable<Project.MVC.ViewModels.VehicleMakeVM>
+﻿@model PagedList.IPagedList<Project.MVC.ViewModels.VehicleMakeVM>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
     ViewBag.Title = "Index";
@@ -13,29 +15,34 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.MakeId)
+            MakeId
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.MakeName)
+            @Html.ActionLink("Brand Name", "Index", new { sortOrder = ViewBag.SortOrder })
         </th>
         <th></th>
     </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.MakeId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MakeName)
-        </td>
-        <td>
-            @Html.ActionLink("Details", "Details", new { id = item.MakeId }) |
-            @Html.ActionLink("Edit", "Edit", new { id = item.MakeId }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.MakeId }) |
-            @Html.ActionLink("Models list", "Index", "VehicleModel", new { id = item.MakeId}, null)
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MakeId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MakeName)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.MakeId }) |
+                @Html.ActionLink("Edit", "Edit", new { id = item.MakeId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.MakeId }) |
+                @Html.ActionLink("Models list", "Index", "VehicleModel", new { id = item.MakeId }, null)
+            </td>
+        </tr>
+    }
 
 </table>
+
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSortOrder }))

@@ -79,3 +79,7 @@ D:\Korisnici\Goran\Projekti\MonoLevel02\Project.MVC\bin\EntityFramework.SqlServe
 D:\Korisnici\Goran\Projekti\MonoLevel02\Project.MVC\bin\EntityFramework.SqlServer.xml
 D:\Korisnici\Goran\Projekti\MonoLevel02\Project.MVC\bin\AutoMapper.dll
 D:\Korisnici\Goran\Projekti\MonoLevel02\Project.MVC\bin\AutoMapper.xml
+D:\Korisnici\Goran\Projekti\MonoLevel02\Project.MVC\bin\PagedList.dll
+D:\Korisnici\Goran\Projekti\MonoLevel02\Project.MVC\bin\PagedList.Mvc.dll
+D:\Korisnici\Goran\Projekti\MonoLevel02\Project.MVC\bin\PagedList.xml
+D:\Korisnici\Goran\Projekti\MonoLevel02\Project.MVC\bin\PagedList.Mvc.xml

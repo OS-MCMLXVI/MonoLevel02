@@ -1,7 +1,9 @@
-﻿using Project.MVC.ViewModels;
+﻿using PagedList;
+using Project.MVC.ViewModels;
 using Project.Service;
 using Project.Service.DAL;
 using Project.Service.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -23,23 +25,65 @@ namespace Project.MVC.Controllers
 
             #region Index
 
-            public ActionResult Index(int id)
+            public ActionResult Index(int id, string sortOrder, string currentSortOrder, int? page)
             {
-                  List<VehicleModelVM> viewList = new List<VehicleModelVM>();
-                  var sourceList = _service.GetAll().Where(x => x.MakeId == id);
+                  ViewBag.ID = id;
 
-                  foreach (var model in sourceList)
+
+                  var sourceList = _service.GetAll().Where(x => x.MakeId == id).OrderBy(s => s.Name).OrderBy(s => s.Name);
+                  ViewBag.SortOrder = String.IsNullOrEmpty(sortOrder) ? "descend" : "";
+                  
+                  if (currentSortOrder != sortOrder)
                   {
-                        viewList.Add(new VehicleModelVM
-                        {
-                              ModelId = model.Id,
-                              ModelName = model.Name,
-                              MakeId = model.MakeId
-                        });
+                        ViewBag.CurrentSortOrder = sortOrder;
+
+                        if (sortOrder == "descend")
+                              sourceList = sourceList.OrderByDescending(s => s.Name);
                   }
 
-                  ViewBag.ID = id;
-                  return View(viewList);
+
+                  List<VehicleModelVM> viewList = new List<VehicleModelVM>();
+                  foreach (var model in sourceList)
+                        viewList.Add(new VehicleModelVM { ModelId = model.Id, ModelName = model.Name, MakeId = model.MakeId });
+
+
+                  int pageSize = 5;
+                  int pageNumber = (page ?? 1);
+                  return View(viewList.ToPagedList(pageNumber, pageSize));
+
+
+
+
+
+
+
+
+
+
+                  //public ActionResult Index(int id, string sortOrder)
+                  //{
+                  //      ViewBag.ID = id;
+                  //      ViewBag.ModelNameSortParam = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+                  //      List<VehicleModelVM> viewList = new List<VehicleModelVM>();
+                  //      var sourceList = _service.GetAll().Where(x => x.MakeId == id).OrderBy(s=>s.Name);
+
+
+                  //      if (sortOrder == "name_desc")
+                  //            sourceList = sourceList.OrderByDescending(s => s.Name);
+
+
+                  //      foreach (var model in sourceList)
+                  //      {
+                  //            viewList.Add(new VehicleModelVM
+                  //            {
+                  //                  ModelId = model.Id,
+                  //                  ModelName = model.Name,
+                  //                  MakeId = model.MakeId
+                  //            });
+                  //      }
+
+                  //      return View(viewList);
+                  //}
             }
 
             #endregion

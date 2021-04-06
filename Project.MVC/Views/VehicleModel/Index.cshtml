@@ -1,4 +1,7 @@
-﻿@model IEnumerable<Project.MVC.ViewModels.VehicleModelVM>
+﻿@model PagedList.IPagedList<Project.MVC.ViewModels.VehicleModelVM>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
 
 @{
     ViewBag.Title = "Index";
@@ -13,38 +16,44 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ModelId)
+            Model ID
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ModelName)
+            @Html.ActionLink("Model Name", "Index", new { sortOrder = ViewBag.SortOrder })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.MakeId)
+            Brand ID
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ModelId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ModelName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MakeId)
-        </td>
-        <td>
-            @Html.ActionLink("Details", "Details", new { id = item.ModelId }) |
-            @Html.ActionLink("Edit", "Edit", new { id = item.ModelId }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.ModelId })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModelId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModelName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MakeId)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.ModelId }) |
+                @Html.ActionLink("Edit", "Edit", new { id = item.ModelId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ModelId })
+            </td>
+        </tr>
+    }
 
 </table>
 
 <p>
-    @Html.ActionLink("Back to Brands", "Index", "VehicleMake" )
+    @Html.ActionLink("Back to Brands", "Index", "VehicleMake")
 </p>
+
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSortOrder }))
