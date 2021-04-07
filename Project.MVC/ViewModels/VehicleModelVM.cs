@@ -7,8 +7,8 @@ namespace Project.MVC.ViewModels
 {
       public class VehicleModelVM
       {
-            public int ModelId { get; set; }
-            public string ModelName { get; set; }
+            public int Id { get; set; }
+            public string Name { get; set; }
             public int MakeId { get; set; }
       }
 }

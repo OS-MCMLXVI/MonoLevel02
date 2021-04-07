@@ -6,10 +6,10 @@ namespace Project.MVC
 {
       public class MvcApplication : HttpApplication
       {
-        protected void Application_Start()
-        {
-            AreaRegistration.RegisterAllAreas();
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
-        }
-    }
+            protected void Application_Start()
+            {
+                  AreaRegistration.RegisterAllAreas();
+                  RouteConfig.RegisterRoutes(RouteTable.Routes);
+            }
+      }
 }

@@ -24,61 +24,27 @@ namespace Project.MVC.Controllers
             }
 
 
+            void DataMapp()
+            {
+                  var mapperConfig = new MapperConfiguration(cfg => { cfg.CreateMap<VehicleMake, VehicleMakeVM>(); });
+
+
+
+                  var mapiranje = new Mapper(mapperConfig);
+                  var sourceList =  _service.GetAll();
+                  var viewList = new List<VehicleMakeVM>();
+            }
+
+
             #region Index
 
             public ActionResult Index(string sortOrder, string currentSortOrder, int? page)
             {
-                  //var mapperConfig = new MapperConfiguration(cfg => {
-                  //      cfg.CreateMap<VehicleMake, VehicleMakeVM>()
-                  //      .ForMember(dest => dest.MakeId, act => act.MapFrom(src => src.Id))
-                  //      .ForMember(dest => dest.MakeName, act => act.MapFrom(src => src.Name)); });
-
-                  //var mapiranje = new Mapper(mapperConfig);
-                  //var sourceList =  _service.GetAll();
-                  //var viewList = new List<VehicleMakeVM>();
-
-                  //foreach (var make in sourceList)
-                  //      viewList.Add(mapiranje.Map<VehicleMakeVM>(make));
-
-
-                  //viewList = viewList.OrderBy(s => s.Name);
-                  //ViewBag.SortOrder = String.IsNullOrEmpty(sortOrder) ? "descend" : "";
-
-                  //if (currentSortOrder != sortOrder)
-                  //{
-                  //      ViewBag.CurrentSortOrder = sortOrder;
-
-                  //      if (sortOrder == "descend")
-                  //            viewList = viewList.OrderByDescending(s => s.Name);
-                  //}
-
-                  
-                  //int pageSize = 5;
-                  //int pageNumber = (page ?? 1);
-
-
-                  //return View(viewList.ToPagedList(pageNumber, pageSize));
-
-
-
-
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
+                  // Source data, default sort -> ascending
                   var sourceList = _service.GetAll().OrderBy(s => s.Name);
+
+                  
+                  // Sort...
                   ViewBag.SortOrder = String.IsNullOrEmpty(sortOrder) ? "descend" : "";
 
                   if (currentSortOrder != sortOrder)
@@ -90,13 +56,20 @@ namespace Project.MVC.Controllers
                   }
 
 
-                  List<VehicleMakeVM> viewList = new List<VehicleMakeVM>();
+                  // Data mapping...
+                  var mapperConfig = new MapperConfiguration(cfg => { cfg.CreateMap<VehicleMake, VehicleMakeVM>(); });
+                  var mapiranje = new Mapper(mapperConfig);
+                  var viewList = new List<VehicleMakeVM>();
+
                   foreach (var make in sourceList)
-                        viewList.Add(new VehicleMakeVM { MakeId = make.Id, MakeName = make.Name });
+                        viewList.Add(mapiranje.Map<VehicleMakeVM>(make));
 
 
+                  // Paging...
                   int pageSize = 5;
                   int pageNumber = (page ?? 1);
+
+
                   return View(viewList.ToPagedList(pageNumber, pageSize));
             }
 
@@ -117,7 +90,7 @@ namespace Project.MVC.Controllers
                   {
                         if (ModelState.IsValid)
                         {
-                              _service.Insert(new VehicleMake { Id = objToCreate.MakeId, Name = objToCreate.MakeName });
+                              _service.Insert(new VehicleMake { Id = objToCreate.Id, Name = objToCreate.Name });
                               _context.SaveChanges();
 
                               return RedirectToAction("Index");
@@ -139,7 +112,7 @@ namespace Project.MVC.Controllers
             public ActionResult Details(int id)
             {
                   var objToView = _service.GetById(id);
-                  return View(new VehicleMakeVM { MakeId = objToView.Id, MakeName = objToView.Name });
+                  return View(new VehicleMakeVM { Id = objToView.Id, Name = objToView.Name });
             }
 
             #endregion
@@ -150,7 +123,7 @@ namespace Project.MVC.Controllers
             public ActionResult Edit(int id)
             {
                   var objToEdit = _service.GetById(id);
-                  return View(new VehicleMakeVM { MakeId = objToEdit.Id, MakeName = objToEdit.Name });
+                  return View(new VehicleMakeVM { Id = objToEdit.Id, Name = objToEdit.Name });
             }
 
             [HttpPost]
@@ -160,7 +133,7 @@ namespace Project.MVC.Controllers
                   {
                         if (ModelState.IsValid)
                         {
-                              _service.Update(new VehicleMake { Id = objToEdit.MakeId, Name = objToEdit.MakeName });
+                              _service.Update(new VehicleMake { Id = objToEdit.Id, Name = objToEdit.Name });
                               _context.SaveChanges();
 
                               return RedirectToAction("Index");
@@ -182,7 +155,7 @@ namespace Project.MVC.Controllers
             public ActionResult Delete(int id)
             {
                   var objToDelete = _service.GetById(id);
-                  return View(new VehicleMakeVM { MakeId = objToDelete.Id, MakeName = objToDelete.Name });
+                  return View(new VehicleMakeVM { Id = objToDelete.Id, Name = objToDelete.Name });
             }
 
             [HttpPost, ActionName("Delete")]
